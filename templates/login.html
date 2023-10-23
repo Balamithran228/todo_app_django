@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+login page
+
+{% block content %}
+
+    <form method="POST">
+    ENTER USERNAME:<input type="text" name="user"><br>
+        ENTER PASSWORD:<input type="password" name="pass">
+
+        {% csrf_token %}
+    <button type="submit">submit</button>
+    </form>
+
+    # reset password direct (default)
+     <a href="{% url 'reset_password' %}">FORGET_PASSWORD?</a><br>
+
+    # error mesgsages
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    Don't have an account? <a href="{% url 'register' %}"> Sign Un </a>
+
+{% endblock %}
+</body>
+</html>

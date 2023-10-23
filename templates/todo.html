@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ welcome to home page {{ request.user }}<br>
+<button><a href="{% url 'logout' %}">logout</a></button>
+<form method="POST">
+    Title:{{ form.title }}<br>
+    description:<br>
+    {{ form.description }}<br>
+    {% csrf_token %}
+    <input type="submit" name="Create Task">
+</form>
+{% load static %}
+{% block content %}
+    <button><a  href="/pdf">Useradministration</a></button>
+    <h1> TODO DETAILS</h1>
+    <table>
+         <thead>
+         <th>user name.</th>
+         <th>title name.</th>
+         <th>description.</th>
+         <th>complete .</th>
+         <th>create .</th>
+         </thead>
+
+    <tr>
+    {% for task in tasks %}
+        <td>{{ task.user }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.complete|yesno:"Yes,No" }}</td>
+        <td>{{ task.create }}</td>
+        <td><a href="{% url 'update' task.id %}">UPDATE</a>  <a href ="/delete/{{ task.id }}">DELETE</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+
+
+{% endblock %}
+</body>
+</html>
